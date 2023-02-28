@@ -1,0 +1,59 @@
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0px;
+}
+html {
+  font-size: 16px;
+}
+
+/* The below media query will change the root html font size for when the screen size is up to '900px' which according to our MUI theme is 'md' */
+@media only screen and (max-width: 900px) {
+  html {
+    font-size: 12px;
+  }
+}
+/* :root {
+  --mui-spacing-container-main: 100px;}
+  /* ...container value */
+a {
+  text-decoration: none;
+  color: inherit;
+  font-family: inherit;
+}
+/* @font-face {
+  font-family: 'Avenir';
+  src: url('../Fonts/avenir_ff/Avenir-Medium.woff');
+  font-weight: 400;
+  font-style: normal;
+} */
+.Father {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* To hide the slider arrows whenever the input type = 'number' */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+#mobileSelectId .MuiSelect-icon {
+  color: white;
+}
+#mobileSelectId .Mui-focused {
+  color: white;
+}
+#KitchensSelect .MuiSelect-icon {
+  color: white;
+}
+#KitchensSelect .Mui-focused {
+  color: white;
+}

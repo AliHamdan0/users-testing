@@ -1,0 +1,104 @@
+.title {
+  font-style: normal;
+  font-weight: 900;
+  font-size: 24px;
+  line-height: 140%;
+}
+@media (min-width: 899px) {
+  .title {
+    font-size: 36px;
+  }
+}
+.flexBetween {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+.text {
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 140%;
+}
+.filtersButtonsContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+.filterButton {
+  font-style: normal;
+  font-weight: 900;
+  font-size: 13px;
+  line-height: 140%;
+  text-transform: capitalize;
+  letter-spacing: 1px;
+  padding: 8px 29px;
+}
+@media (min-width: 899px) {
+  .filterButton {
+    font-size: 18px;
+  }
+  .filtersButtonsContainer {
+    justify-content: flex-start;
+  }
+}
+.incidentsCategories {
+  display: flex;
+  align-items: center;
+  gap: 0.08vw;
+  border-bottom: 1px solid inherit;
+}
+.incidentCategoryButton {
+  padding: 9px;
+  font-weight: 900;
+  font-size: 14px;
+  line-height: 140%;
+  text-transform: capitalize;
+  border-radius: 2px;
+}
+@media (min-width: 899px) {
+  .incidentCategoryButton {
+    font-size: 18px;
+  }
+}
+.tableText {
+  font-style: normal;
+  font-weight: 900;
+  font-size: 14px;
+}
+.PaginationContainer {
+  margin-top: 25px;
+  display: flex;
+  justify-content: flex-end;
+}
+.deleteModalContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 400px;
+  height: 250px;
+  padding: 15px;
+}
+.DeleteButtonsContainer {
+  margin-top: 15%;
+  display: flex;
+  justify-content: space-evenly;
+}
+.popupOutlineRemove:focus-visible {
+  outline: 0;
+}
+.imgPopupCloseButton {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  padding: 5px;
+  background-color: grey;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  z-index: 5;
+}
