@@ -8,6 +8,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "../services/redux-toolkit/store";
 import useFilterMethods from "../services/utilities/useFilterMethods";
 import { TableData } from "../components/homePage/tableData";
+import { useNavigate } from "react-router-dom";
 
 export const Home = () => {
   const users = useSelector((state: RootState) => state?.usersSlice?.info);
@@ -16,6 +17,7 @@ export const Home = () => {
   const [filterType, setFilterType] = useState("");
   const [page, setPage] = useState(1);
   const [filterUser, setFilterUser] = useState<any>(users);
+  const navigate = useNavigate();
   const [filters, setFilters] = useState({
     search: "",
     hobbies: [],
@@ -61,7 +63,9 @@ export const Home = () => {
     <Container maxWidth="lg">
       <Box className={style.flexBetween}>
         <Typography className={style.title}>Users List</Typography>
-        <Button variant="main">Add New User</Button>
+        <Button variant="main" onClick={() => navigate("/new-user")}>
+          Add New User
+        </Button>
       </Box>
       <Box sx={{ marginTop: "1.875rem" }}>
         <MemoFilters setFilters={setFilters} setFilterUser={setFilterUser} />

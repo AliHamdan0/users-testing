@@ -20,7 +20,7 @@ export const Menu = () => {
       <NavLink to="/" style={activeLink}>
         Home
       </NavLink>
-      <NavLink to="/addUser" style={activeLink}>
+      <NavLink to="/new-user" style={activeLink}>
         Add User
       </NavLink>
     </Box>

@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 const initialState = {
   info: [],
 };
@@ -8,7 +8,7 @@ export const usersSlice = createSlice({
   initialState,
   reducers: {
     saveUser(state, action) {
-      state.info = action.payload; // its enough because of immer
+      state.info = action.payload;
     },
   },
 });

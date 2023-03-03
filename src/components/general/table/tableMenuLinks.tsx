@@ -3,12 +3,21 @@ import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import { useState, useEffect } from "react";
 import { CustomModal } from "../customModal";
 import style from "../../../styles/incidents.module.css";
+import IncidentForm from "../../newUser/incidentForm";
+import { useSelector } from "react-redux";
+import { RootState } from "../../../services/redux-toolkit/store";
 // For table menus that only contains links.
-export default function TableMenuLinks({ menuData, handleDelete }) {
+export default function TableMenuLinks({
+  menuData,
+  handleDelete,
+  handleEdit,
+  selectedItem = -1,
+}) {
   const [anchorEl, setAnchorEl] = useState<null | any>();
   const [openEdit, setOpenEdit] = useState<boolean | null>(false);
   const [openDelete, setOpenDelete] = useState<boolean | null>(false);
   const [type, setType] = useState("0"); //0 none, 1 edit , 2 delete
+  const users = useSelector((state: RootState) => state.usersSlice?.info);
   const handleClose = (value) => {
     setType(value);
     setAnchorEl(null);
@@ -100,13 +109,29 @@ export default function TableMenuLinks({ menuData, handleDelete }) {
           </Box>
         ))}
       </Menu>
-      <CustomModal open={openEdit} setOpen={setOpenEdit} setType={setType}>
-        <Box sx={{ width: "200px", height: "200px" }}>Edit</Box>
+      <CustomModal
+        open={openEdit}
+        setOpen={setOpenEdit}
+        setType={setType}
+        maxW="90vw"
+      >
+        <Box sx={{ p: "10%" }}>
+          <IncidentForm
+            type="edit"
+            initialValues={users[selectedItem]}
+            onSubmit={(values) => handleEdit(values, setType)}
+            setType={setType}
+            setEditOpen={setAnchorEl}
+          />
+        </Box>
       </CustomModal>
       <CustomModal open={openDelete} setOpen={setOpenDelete} setType={setType}>
         <Box className={style.deleteModalContainer}>
           <Box>
-            <Typography component="p" sx={{ fontSize: "24px" }}>
+            <Typography
+              component="p"
+              sx={{ fontSize: { xs: "18px", md: "24px" } }}
+            >
               Do You Want To Delete This User
             </Typography>
             <Box className={style.DeleteButtonsContainer}>

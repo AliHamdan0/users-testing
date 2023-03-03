@@ -15,6 +15,7 @@ import useFetch from "./services/utilities/useFetch";
 import { getUsers } from "./services/utilities/apiConfig";
 import { useEffect } from "react";
 import { usersSlice } from "./services/redux-toolkit/slices/usersSlice";
+import { NewUser } from "./pages/newUser";
 
 function App() {
   const [getFetch, postFetch, pathcFetch] = useFetch();
@@ -54,6 +55,7 @@ function App() {
             <Layout custom={false}>
               <Routes>
                 <Route path="/" element={<Home />} />
+                <Route path="/new-user" element={<NewUser />} />
               </Routes>
             </Layout>
           </LocalizationProvider>

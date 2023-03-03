@@ -33,6 +33,13 @@ export const TableData = ({ tableHeader, filterUser, setFilterUser }) => {
     setFilterUser([...newUsers]);
     store.dispatch(saveUser(newUsers));
   };
+  const handleEdit = (values, setType) => {
+    let newUsers = [...filterUser];
+    newUsers[selectedItem] = values;
+    setFilterUser([...newUsers]);
+    store.dispatch(saveUser(newUsers));
+    setType("0");
+  };
   return (
     <TableContainer component={Paper}>
       <Table>
@@ -89,6 +96,10 @@ export const TableData = ({ tableHeader, filterUser, setFilterUser }) => {
                       <TableMenuLinks
                         menuData={tableMenuData}
                         handleDelete={() => handleDelete()}
+                        handleEdit={(values, setType) =>
+                          handleEdit(values, setType)
+                        }
+                        selectedItem={selectedItem}
                       />
                     </Box>
                   </CustomStyledTableCell>

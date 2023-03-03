@@ -1,14 +1,9 @@
-import { useState } from "react";
 import { Box, Container, Link } from "@mui/material";
-
-import { useSelector } from "react-redux";
 import style from "../../styles/headFooter.module.css";
 import { Menu } from "./menu";
 
 ///
 export const Header = () => {
-  const user = useSelector((state: any) => state.userSlice?.info);
-
   return (
     <Box sx={{ backgroundColor: "brand.secondaryDark", mb: "50px" }}>
       <Container maxWidth="lg" sx={{ height: "71px" }}>
