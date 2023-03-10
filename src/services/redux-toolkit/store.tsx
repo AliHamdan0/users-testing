@@ -1,18 +1,12 @@
-import { configureStore, PreloadedState } from "@reduxjs/toolkit";
+import { configureStore } from "@reduxjs/toolkit";
 import { usersSlice } from "./slices/usersSlice";
+import { setupListeners } from "@reduxjs/toolkit/query";
 import { combineReducers } from "redux";
-
-const rootReducer = combineReducers({
-  usersSlice: usersSlice.reducer,
+export const store = configureStore({
+  reducer: combineReducers({
+    usersSlice: usersSlice.reducer,
+  }),
 });
+setupListeners(store.dispatch);
 
-export const setupStore = (preloadedState?: PreloadedState<RootState>) => {
-  return configureStore({
-    reducer: rootReducer,
-    preloadedState,
-  });
-};
-
-export type RootState = ReturnType<typeof rootReducer>;
-export type AppStore = ReturnType<typeof setupStore>;
-export type AppDispatch = AppStore["dispatch"];
+export type RootState = ReturnType<typeof store.getState>;

@@ -3,12 +3,11 @@ import { Box } from "@mui/system";
 import Loading from "../components/general/loading";
 import { useState, useId } from "react";
 import IncidentForm from "../components/newUser/incidentForm";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import AlertMessage from "../components/general/alertMessage";
 import { RootState } from "../services/redux-toolkit/store";
 import { usersSlice } from "../services/redux-toolkit/slices/usersSlice";
 import { useNavigate } from "react-router-dom";
-import { useAppDispatch } from "../services/redux-toolkit/hooks";
 
 export const NewUser = () => {
   const [loading, setLoading] = useState<boolean>(false);
@@ -17,7 +16,7 @@ export const NewUser = () => {
   const { actions } = usersSlice;
   const { saveUser } = actions;
   const navigate = useNavigate();
-  const dispatch = useAppDispatch();
+  const dispatch = useDispatch();
   const formValues = {
     id: useId(),
     hobby: "",

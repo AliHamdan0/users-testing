@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-const initialState = {
+const initialState: { info: any[] } = {
   info: [],
 };
 
