@@ -14,12 +14,13 @@ import {
 import TableMenuLinks from "../general/table/tableMenuLinks";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import { useMemo, useState } from "react";
-import { store } from "../../services/redux-toolkit/store";
 import { usersSlice } from "../../services/redux-toolkit/slices/usersSlice";
+import { useAppDispatch } from "../../services/redux-toolkit/hooks";
 export const TableData = ({ tableHeader, filterUser, setFilterUser }) => {
   const [selectedItem, setSelectedItem] = useState(-1);
   const { actions } = usersSlice;
   const { saveUser } = actions;
+  const dispatch = useAppDispatch();
   const tableMenuData = useMemo(
     () => [
       { name: "Edit", value: "1" },
@@ -31,13 +32,13 @@ export const TableData = ({ tableHeader, filterUser, setFilterUser }) => {
     let newUsers = [...filterUser];
     newUsers?.splice(selectedItem, 1);
     setFilterUser([...newUsers]);
-    store.dispatch(saveUser(newUsers));
+    dispatch(saveUser(newUsers));
   };
   const handleEdit = (values, setType) => {
     let newUsers = [...filterUser];
     newUsers[selectedItem] = values;
     setFilterUser([...newUsers]);
-    store.dispatch(saveUser(newUsers));
+    dispatch(saveUser(newUsers));
     setType("0");
   };
   return (

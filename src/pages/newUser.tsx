@@ -5,9 +5,10 @@ import { useState, useId } from "react";
 import IncidentForm from "../components/newUser/incidentForm";
 import { useSelector } from "react-redux";
 import AlertMessage from "../components/general/alertMessage";
-import { RootState, store } from "../services/redux-toolkit/store";
+import { RootState } from "../services/redux-toolkit/store";
 import { usersSlice } from "../services/redux-toolkit/slices/usersSlice";
 import { useNavigate } from "react-router-dom";
+import { useAppDispatch } from "../services/redux-toolkit/hooks";
 
 export const NewUser = () => {
   const [loading, setLoading] = useState<boolean>(false);
@@ -16,7 +17,7 @@ export const NewUser = () => {
   const { actions } = usersSlice;
   const { saveUser } = actions;
   const navigate = useNavigate();
-
+  const dispatch = useAppDispatch();
   const formValues = {
     id: useId(),
     hobby: "",
@@ -27,7 +28,7 @@ export const NewUser = () => {
   };
   const handleSubmit = async (values: never) => {
     setLoading(true);
-    store.dispatch(saveUser([...users, values]));
+    dispatch(saveUser([...users, values]));
     setSuccessful(true);
 
     setTimeout(() => {

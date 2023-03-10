@@ -9,17 +9,19 @@ import { Routes, Route } from "react-router-dom";
 import { Layout } from "./components/general/layout";
 import { CacheProvider } from "@emotion/react";
 import createCache from "@emotion/cache";
-import { store } from "./services/redux-toolkit/store";
+import { setupStore } from "./services/redux-toolkit/store";
 import { Provider } from "react-redux";
 import useFetch from "./services/utilities/useFetch";
 import { getUsers } from "./services/utilities/apiConfig";
 import { useEffect } from "react";
 import { usersSlice } from "./services/redux-toolkit/slices/usersSlice";
 import { NewUser } from "./pages/newUser";
+import { useAppDispatch } from "./services/redux-toolkit/hooks";
 
 function App() {
   const [getFetch, postFetch, pathcFetch] = useFetch();
   const theme = CustomTheme();
+  const dispatch = useAppDispatch();
   const cacheLtr = createCache({
     key: "muiltr",
     prepend: true, //to make css file override default style
@@ -42,12 +44,13 @@ function App() {
           type: i % 2 == 0 ? "New" : "Old",
         };
       });
-      store.dispatch(saveUser(newUsers));
+      dispatch(saveUser(newUsers));
     };
     getData();
   }, []);
+  const Appstore = setupStore();
   return (
-    <Provider store={store}>
+    <Provider store={Appstore}>
       <CacheProvider value={cacheLtr}>
         <ThemeProvider theme={theme}>
           <CssBaseline />
