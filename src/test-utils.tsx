@@ -32,6 +32,7 @@ interface ExtendedRenderOptions extends Omit<RenderOptions, "queries"> {
 }
 export function renderWithProviders(
   ui: React.ReactElement,
+  path: string = "/",
   {
     preloadedState = { usersSlice: { info: MockStoredata } },
     // Automatically create a store instance if no store was passed in
@@ -49,7 +50,7 @@ export function renderWithProviders(
               <LocalizationProvider dateAdapter={AdapterDateFns}>
                 <Layout custom={false}>
                   <Routes>
-                    <Route path="" element={children} />
+                    <Route path={path} element={children} />
                   </Routes>
                 </Layout>
               </LocalizationProvider>
