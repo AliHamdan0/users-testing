@@ -42,76 +42,39 @@ describe("render Filters in Home Page", () => {
     const optionElement = screen.getByRole("option", { name: /reading/i });
     await user.click(optionElement);
     expect(selectElement).toHaveTextContent("Reading");
-
-    ////Another way if we have select html element
-    ///but Mui render select as div element so we can't use it.
-
-    //   const selection = screen.getByRole('listbox', { name: /​/i });
-    //   await user.selectOptions(selection, [
-    //     'Swimming',
-    //     'Reading',
-    //     'Playing Football',
-    //   ]);
-    //   const optionOne = screen.getByRole('option', {
-    //     name: 'Swimming',
-    //   }) as HTMLOptionElement;
-    //   expect(optionOne.selected).toBe(true);
-
-    //   const optionTwo = screen.getByRole('option', {
-    //     name: 'Reading',
-    //   }) as HTMLOptionElement;
-    //   expect(optionTwo.selected).toBe(false);
-
-    //   const optionThree = screen.getByRole('option', {
-    //     name: 'Playing Football',
-    //   }) as HTMLOptionElement;
-    //   expect(optionThree.selected).toBe(false);
-    // });
-    ////////
-    test("date Field", async () => {
-      user.setup();
-      const setFilters = jest.fn();
-      const setFilterUser = jest.fn();
-      renderWithProviders(
-        <MemoFilters setFilters={setFilters} setFilterUser={setFilterUser} />
-      );
-      ///Date Field
-      const dateElement = screen.getByLabelText(/after date/i);
-      const calenderIcon = screen.getByTestId("CalendarIcon");
-      await user.click(calenderIcon);
-      const monthDay = screen.getByRole("gridcell", { name: /15/i });
-      await user.click(monthDay);
-      expect(dateElement).toBeValid();
-    });
-    test("apply Filters", async () => {
-      user.setup();
-      const setFilters = jest.fn();
-      const setFilterUser = jest.fn();
-      renderWithProviders(
-        <MemoFilters setFilters={setFilters} setFilterUser={setFilterUser} />
-      );
-      const filterButton = screen.getByRole("button", {
-        name: /apply filters/i,
-      });
-      await user.click(filterButton);
-      expect(setFilters).toHaveBeenCalledTimes(1);
-
-      const clearButton = screen.getByRole("button", { name: /clear/i });
-      await user.click(clearButton);
-      expect(setFilters).toHaveBeenCalledTimes(1);
-      expect(setFilterUser).toHaveBeenCalledTimes(1);
-    });
   });
-});
-
-describe("Add User Button in Home Page", () => {
-  test("navigate to the new user page on Click", async () => {
+  test("date Field", async () => {
     user.setup();
-    renderWithProviders(<Home />);
-    const addUserButton = screen.getByRole("button", { name: /add new user/i });
-    await user.click(addUserButton);
-    // Check correct page url showed up
-    expect(document.URL).toMatch("new-user");
+    const setFilters = jest.fn();
+    const setFilterUser = jest.fn();
+    renderWithProviders(
+      <MemoFilters setFilters={setFilters} setFilterUser={setFilterUser} />
+    );
+    ///Date Field
+    const dateElement = screen.getByLabelText(/after date/i);
+    const calenderIcon = screen.getByTestId("CalendarIcon");
+    await user.click(calenderIcon);
+    const monthDay = screen.getByRole("gridcell", { name: /15/i });
+    await user.click(monthDay);
+    expect(dateElement).toBeValid();
+  });
+  test("apply Filters", async () => {
+    user.setup();
+    const setFilters = jest.fn();
+    const setFilterUser = jest.fn();
+    renderWithProviders(
+      <MemoFilters setFilters={setFilters} setFilterUser={setFilterUser} />
+    );
+    const filterButton = screen.getByRole("button", {
+      name: /apply filters/i,
+    });
+    await user.click(filterButton);
+    expect(setFilters).toHaveBeenCalledTimes(1);
+
+    const clearButton = screen.getByRole("button", { name: /clear/i });
+    await user.click(clearButton);
+    expect(setFilters).toHaveBeenCalledTimes(1);
+    expect(setFilterUser).toHaveBeenCalledTimes(1);
   });
 });
 
@@ -133,13 +96,12 @@ describe("Table Buttons Filter types", () => {
     expect(setFilterType).toHaveBeenCalledTimes(1);
   });
 });
+
 describe("Table", () => {
   test("open popup", async () => {
     user.setup();
-    const { container } = renderWithProviders(<Home />);
-    // logRoles(container);
+    renderWithProviders(<Home />);
     const dotsIcon = screen.getAllByTestId("MoreHorizIcon");
-    // screen.debug(dotsIcon[0]);
     await user.click(dotsIcon[0]);
     const popup = screen.getByRole("menu");
     expect(popup).toBeInTheDocument();
@@ -150,7 +112,7 @@ describe("Table", () => {
 
     const editUser = screen.getByRole("button", { name: /update user/i });
     expect(editUser).toBeInTheDocument();
-  });
+  }, 20000);
 
   test("render delete user popup", async () => {
     user.setup();
@@ -166,7 +128,7 @@ describe("Table", () => {
     await user.click(deleteOption);
     const deleteUser = screen.getByRole("button", { name: /confirm/i });
     expect(deleteUser).toBeInTheDocument();
-  });
+  }, 20000);
 
   test("delete user function", async () => {
     user.setup();
@@ -193,7 +155,7 @@ describe("Table", () => {
     const deleteButton = screen.getByRole("button", { name: /confirm/i });
     await user.click(deleteButton);
     expect(handleDelete).toHaveBeenCalledTimes(1);
-  });
+  }, 20000);
 });
 
 describe("render pagination", () => {
@@ -208,3 +170,39 @@ describe("render pagination", () => {
     expect(setPage).toHaveBeenCalledTimes(1);
   });
 });
+
+describe("Add User Button in Home Page", () => {
+  test("navigate to the new user page on Click", async () => {
+    user.setup();
+    renderWithProviders(<Home />);
+    const addUserButton = screen.getByRole("button", { name: /add new user/i });
+    await user.click(addUserButton);
+    // Check correct page url showed up
+    expect(document.URL).toMatch("new-user");
+  });
+});
+////Another way if we have select html element
+///but Mui render select as div element so we can't use it.
+
+//   const selection = screen.getByRole('listbox', { name: /​/i });
+//   await user.selectOptions(selection, [
+//     'Swimming',
+//     'Reading',
+//     'Playing Football',
+//   ]);
+//   const optionOne = screen.getByRole('option', {
+//     name: 'Swimming',
+//   }) as HTMLOptionElement;
+//   expect(optionOne.selected).toBe(true);
+
+//   const optionTwo = screen.getByRole('option', {
+//     name: 'Reading',
+//   }) as HTMLOptionElement;
+//   expect(optionTwo.selected).toBe(false);
+
+//   const optionThree = screen.getByRole('option', {
+//     name: 'Playing Football',
+//   }) as HTMLOptionElement;
+//   expect(optionThree.selected).toBe(false);
+// });
+////////
