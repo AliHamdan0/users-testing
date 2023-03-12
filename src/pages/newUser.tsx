@@ -35,6 +35,7 @@ export const NewUser = () => {
       navigate("/");
     }, 1200);
   };
+
   return (
     <>
       <title>New User</title>
