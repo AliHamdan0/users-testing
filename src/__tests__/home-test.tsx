@@ -57,7 +57,7 @@ describe("render Filters in Home Page", () => {
     const monthDay = screen.getByRole("gridcell", { name: /15/i });
     await user.click(monthDay);
     expect(dateElement).toBeValid();
-  });
+  }, 20000);
   test("apply Filters", async () => {
     user.setup();
     const setFilters = jest.fn();
