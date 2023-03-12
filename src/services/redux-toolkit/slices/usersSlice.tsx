@@ -1,5 +1,5 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-const initialState = {
+import { createSlice } from "@reduxjs/toolkit";
+const initialState: { info: any[] } = {
   info: [],
 };
 

@@ -60,60 +60,60 @@ export default function IncidentForm({
       </Box>
     </>
   );
-
+  const handleSubmit = async (values) => {
+    onSubmit(values);
+  };
   return (
     <>
-      <Formik initialValues={initialValues} onSubmit={onSubmit}>
-        {(props) => (
-          <Form>
-            <CustomTextField
-              name="username"
-              requiredstar="true"
-              inputlabel="User name"
-              type="text"
-              required
-              autoComplete="off"
-              sx={customInputStyles}
-            />
+      <Formik initialValues={initialValues} onSubmit={handleSubmit}>
+        <Form>
+          <CustomTextField
+            name="username"
+            requiredstar="true"
+            inputlabel="User name"
+            type="text"
+            required
+            autoComplete="off"
+            sx={customInputStyles}
+          />
 
-            <FormControl sx={customInputStyles}>
-              <InputLabel id="hobby">
-                <Box>
-                  <Typography
-                    component="span"
-                    sx={{ color: "brand.primaryDark" }}
-                  >
-                    *{" "}
-                  </Typography>
-                  Hobby
-                </Box>
-              </InputLabel>
-              <Field name="hobby">
-                {({ field }) => (
-                  <Select {...field} required labelId="hobby">
-                    {hobbies.map((item) => (
-                      <MenuItem key={item?.id} value={item?.id}>
-                        {item?.name}
-                      </MenuItem>
-                    ))}
-                  </Select>
-                )}
-              </Field>
-            </FormControl>
+          <FormControl sx={customInputStyles}>
+            <InputLabel id="hobby">
+              <Box>
+                <Typography
+                  component="span"
+                  sx={{ color: "brand.primaryDark" }}
+                >
+                  *{" "}
+                </Typography>
+                Hobby
+              </Box>
+            </InputLabel>
+            <Field name="hobby">
+              {({ field }) => (
+                <Select {...field} required labelId="hobby">
+                  {hobbies.map((item) => (
+                    <MenuItem key={item?.id} value={item?.id}>
+                      {item?.name}
+                    </MenuItem>
+                  ))}
+                </Select>
+              )}
+            </Field>
+          </FormControl>
 
-            <CustomTextField
-              name="email"
-              type="email"
-              inputlabel="email"
-              requiredstar="true"
-              required
-              autoComplete="off"
-              sx={customInputStyles}
-            />
-            {type == "new" && <NewIncidentForm />}
-            {type == "edit" && <EditIncidentForm />}
-          </Form>
-        )}
+          <CustomTextField
+            name="email"
+            type="email"
+            inputlabel="email"
+            requiredstar="true"
+            required
+            autoComplete="off"
+            sx={customInputStyles}
+          />
+          {type == "new" && <NewIncidentForm />}
+          {type == "edit" && <EditIncidentForm />}
+        </Form>
       </Formik>
     </>
   );
